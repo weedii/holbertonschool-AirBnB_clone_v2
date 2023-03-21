@@ -11,7 +11,8 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
@@ -115,16 +116,29 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        arglist = args.split(" ")
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif arglist[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+        dic = dict()
+        for arg in arglist[1:]:
+            simplesarg = arg.split("=")
+            if simplesarg[1][0] == '"' and simplesarg[1][-1] == '"':
+                dic[simplesarg[0]] = simplesarg[1][1:-1]
+            else:
+                try:
+                    dic[simplesarg[0]] = int(simplesarg[1])
+                except ValueError:
+                    try:
+                        dic[simplesarg[0]] = float(simplesarg[1])
+                    except ValueError:
+                        dic[simplesarg[0]] = simplesarg[1]
+        new_instance = HBNBCommand.classes[arglist[0]](**dic)
+        new_instance.save()
+
 
     def help_create(self):
         """ Help information for the create method """
