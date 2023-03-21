@@ -137,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
                     except ValueError:
                         dic[simplesarg[0]] = simplesarg[1]
         new_instance = HBNBCommand.classes[arglist[0]](**dic)
+        print(new_instance.id)
         new_instance.save()
 
 
