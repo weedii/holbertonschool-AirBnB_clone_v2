@@ -8,7 +8,6 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    # delete method
     def delete(self, obj=None):
         """delete obj from __objects if it's inside"""
 
