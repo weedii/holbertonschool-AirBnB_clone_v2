@@ -17,7 +17,7 @@ class FileStorage:
 
         cls_new = {}
         for key, value in self.__objects.items():
-            if cls == value.__class__.name:
+            if cls == value.__class__:
                 cls_new[key] = value
         return cls_new
 
