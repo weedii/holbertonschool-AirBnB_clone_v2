@@ -7,11 +7,13 @@ from datetime import datetime
 import models
 from os import getenv
 import uuid
+from sqlalchemy import declarative_base
+
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
 
-
+Base = declarative_base()
 class BaseModel:
     """The BaseModel class from which future classes will be derived"""
 
