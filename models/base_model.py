@@ -8,7 +8,7 @@ import models
 from os import getenv
 import uuid
 from sqlalchemy import declarative_base
-
+from sqlalchemy import *
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -17,6 +17,9 @@ Base = declarative_base()
 class BaseModel:
     """The BaseModel class from which future classes will be derived"""
 
+    id = Column(String(60), nullable = False, primary_key =  True)
+    created_at = Column(DateTime, nullable = False, default= datetime.utcnow())
+    updated_at = Column(DateTime, nullable = False, default = datetime.utcnow())
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
         if kwargs:
