@@ -7,7 +7,7 @@ from datetime import datetime
 import models
 from os import getenv
 import uuid
-from sqlalchemy import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import *
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
